@@ -1,1 +1,1 @@
-W tym notatniku analizowane są dane o erupcjach wulkanów. Notatnik był częścią projektu zajęć akademickich z Analizy w Pythonie.
+W tym notatniku analizowane są dane dotyczące erupcji wulkanów. Notatnik stanowił część projektu realizowanego podczas zajęć z analizy danych w Pythonie.
