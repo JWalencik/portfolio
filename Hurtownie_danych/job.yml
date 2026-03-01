@@ -1,0 +1,60 @@
+resources:
+  jobs:
+    Fligths_data:
+      name: Fligths_data
+      tasks:
+        - task_key: bronze_Airlines
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/bronze_layer/bronze_Airlines
+            source: WORKSPACE
+        - task_key: bronze_Airports
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/bronze_layer/bronze_Airports
+            source: WORKSPACE
+        - task_key: bronze_Flights
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/bronze_layer/bronze_Flights
+            source: WORKSPACE
+        - task_key: silver_DimAirline
+          depends_on:
+            - task_key: bronze_Airlines
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/silver_layer/silver_DimAirline
+            source: WORKSPACE
+        - task_key: silver_DimAirports
+          depends_on:
+            - task_key: bronze_Airports
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/silver_layer/silver_DimAirports
+            source: WORKSPACE
+        - task_key: silver_DimDates
+          depends_on:
+            - task_key: bronze_Flights
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/silver_layer/silver_DimDates
+            source: WORKSPACE
+        - task_key: silver_DimFligthDetails
+          depends_on:
+            - task_key: bronze_Flights
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/silver_layer/silver_DimFligthDetails
+            source: WORKSPACE
+        - task_key: silver_DimFligthList
+          depends_on:
+            - task_key: bronze_Flights
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/silver_layer/silver_DimFligthList
+            source: WORKSPACE
+        - task_key: gold_FactFlights
+          depends_on:
+            - task_key: silver_DimFligthList
+            - task_key: silver_DimAirline
+            - task_key: silver_DimAirports
+            - task_key: silver_DimFligthDetails
+            - task_key: silver_DimDates
+          notebook_task:
+            notebook_path: /Workspace/Users/julawal@student.agh.edu.pl/julawal@student.agh.edu.pl_ce/Hurtownie_Danych/Project/gold_FactFlights
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
